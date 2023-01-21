@@ -1,0 +1,22 @@
+Block Hinzufügen:
+	- Block in ModBlocks Klasse registrieren
+	-assets.assets.tutorialmod.blockstates blockname.json
+	-assets.assets.tutorialmod.models.block blockname.json
+	-assets.assets.tutorialmod.textures.block blockname.png
+	-data.minecraft.tags.blocks.mineable 			// anpassen mit welchen Werkzeugen was gefarmt werden kann
+	-data.tutorialmod.loot_tables.blocks blockname.json
+	-data.tutorialmod.recipes 				// Alle Recipes die gepflegt werden müssen fürs Schmelzen oder so
+
+	BlockItem hinzufügen:
+
+		-assets.models.item blockname.json
+		
+
+
+
+
+
+Item Hinzufügen:
+	- Item in ModItems Klasse registrieren
+	-assets.tutorialmod.models.item blockname.json
+	-assets.tutorialmod.textures.item blockname.json

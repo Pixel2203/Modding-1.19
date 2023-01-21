@@ -1,7 +1,13 @@
 package net.marvin.tutorialmod;
 
 import com.mojang.logging.LogUtils;
+import net.marvin.tutorialmod.block.BlockRegistry;
+import net.marvin.tutorialmod.block.ModBlocks;
+import net.marvin.tutorialmod.item.ItemRegistry;
+import net.marvin.tutorialmod.painting.PaintingsRegistry;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -24,7 +30,14 @@ public class Tutorialmod
     public Tutorialmod()
     {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+
+        ItemRegistry.register(modEventBus); // Adds Items
+        BlockRegistry.register(modEventBus); // Adds Blocks
+        ConfigFreatureInit.CONFIGURED_FEATURES.register(modEventBus); // Ore Generation
+        PlacedFeatureInit.PLACED_FEATURES.register(modEventBus);
+        PaintingsRegistry.register(modEventBus);
         modEventBus.addListener(this::commonSetup);
+
 
 
         // Register ourselves for server and other game events we are interested in
@@ -48,9 +61,7 @@ public class Tutorialmod
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event)
         {
-            // Some client setup code
-            LOGGER.info("HELLO FROM CLIENT SETUP");
-            LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
+            //ItemBlockRenderTypes.setRenderLayer(ModBlocks.BLUEBERRY_CROP.get(), RenderType.cutout());
         }
     }
 }

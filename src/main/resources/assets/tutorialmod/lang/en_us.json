@@ -1,0 +1,23 @@
+{
+  "item.tutorialmod.zircon": "Zircon",
+  "item.tutorialmod.raw_zircon": "Raw Zircon",
+  "item.tutorialmod.eight_ball": "Eight Ball",
+  "item.tutorialmod.zircon_helmet": "Zircon Helmet",
+  "item.tutorialmod.zircon_chestplate": "Zircon Chestplate",
+  "item.tutorialmod.zircon_leggings": "Zircon Leggings",
+  "item.tutorialmod.zircon_boots": "Zircon Boots",
+  "item.tutorialmod.zircon_pickaxe": "Zircon Pickaxe",
+  "item.tutorialmod.zircon_hoe": "Zircon Hoe",
+  "item.tutorialmod.zircon_sword": "Zircon Sword",
+  "item.tutorialmod.zircon_axe": "Zircon Axe",
+  "item.tutorialmod.zircon_shovel": "Zircon Shovel",
+  "item.tutorialmod.blueberry_seeds": "Blueberry Seeds",
+  "item.tutorialmod.blueberry": "Blueberry",
+  "item.tutorialmod.blueberry_crop": "Blueberry Crop",
+
+  "block.tutorialmod.zircon_block": "Block of Zircon",
+  "block.tutorialmod.zircon_ore" : "Zircon Ore",
+  "block.tutorialmod.deepslate_zircon_ore" : "Deepslate Zircon Ore",
+
+  "itemGroup.tutorialtab": "TutorialTab"
+}
