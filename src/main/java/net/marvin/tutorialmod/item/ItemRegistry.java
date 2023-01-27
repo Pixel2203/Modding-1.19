@@ -52,6 +52,9 @@ public class ItemRegistry {
             ITEMS.register("zircon_shovel", () -> ModItems.ZIRCON_SHOVEL_ITM);
 
 
+    // Custom Itmes
+    public static final RegistryObject<Item> CUSTOM_MODEL_ITEM =
+            ITEMS.register("custom_item", () -> ModItems.CUSTOM_MODEL_TEST_ITM);
 
 
     public static void register(IEventBus eventBus){

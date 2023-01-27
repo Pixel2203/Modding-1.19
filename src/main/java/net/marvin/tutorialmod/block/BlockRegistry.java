@@ -39,6 +39,14 @@ public class BlockRegistry {
     public static final RegistryObject<Block> BLUEBERRY_CROP =
             BLOCKS.register("blueberry_crop",
                     ()-> ModBlocks.BLUEBERRY_CROP_BLK);
+    public static final RegistryObject<Block> FISHHOOK =
+            registerBlock("fishhook",
+                    () -> ModBlocks.FISHHOOK_BLK,
+                    ModCreativeModeTab.TUTORIAL_TAB);
+    public static final RegistryObject<Block> CUSTOM_SOIL =
+            registerBlock("custom_soil",
+                    () -> ModBlocks.CUSTOM_SOIL_BLK,
+                    ModCreativeModeTab.TUTORIAL_TAB);
 
 
 

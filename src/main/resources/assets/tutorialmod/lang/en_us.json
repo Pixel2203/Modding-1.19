@@ -14,10 +14,13 @@
   "item.tutorialmod.blueberry_seeds": "Blueberry Seeds",
   "item.tutorialmod.blueberry": "Blueberry",
   "item.tutorialmod.blueberry_crop": "Blueberry Crop",
+  "item.tutorialmod.custom_item": "Custom Model Test Item",
 
   "block.tutorialmod.zircon_block": "Block of Zircon",
   "block.tutorialmod.zircon_ore" : "Zircon Ore",
   "block.tutorialmod.deepslate_zircon_ore" : "Deepslate Zircon Ore",
+  "block.tutorialmod.fishhook": "Fishhook",
+  "block.tutorialmod.custom_soil": "Custom Soil Block",
 
   "itemGroup.tutorialtab": "TutorialTab"
 }

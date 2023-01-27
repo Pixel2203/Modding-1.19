@@ -100,4 +100,11 @@ public class ModItems {
                     new Item.Properties().tab(ModCreativeModeTab.TUTORIAL_TAB)
             );
 
+    // Custom Items
+    public static final Item CUSTOM_MODEL_TEST_ITM =
+            new Item(
+                    new Item.Properties().tab(ModCreativeModeTab.TUTORIAL_TAB)
+            );
+
+
 }
