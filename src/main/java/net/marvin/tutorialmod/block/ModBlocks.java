@@ -27,7 +27,7 @@ public class ModBlocks {
     public static final CropBlock BLUEBERRY_CROP_BLK =
             new BlueBerryCrop(BlockBehaviour.Properties.copy(Blocks.WHEAT));
     public static final Block CUSTOM_SOIL_BLK =
-            new CustomSoilBlock(BlockBehaviour.Properties.of(Material.DIRT));
+            new CustomSoilBlock(BlockBehaviour.Properties.of(Material.DIRT).randomTicks());
 
 
 

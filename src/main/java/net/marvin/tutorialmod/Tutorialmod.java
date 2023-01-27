@@ -26,7 +26,8 @@ public class Tutorialmod
     // Very Important Commment!
     // Define mod id in a common place for everything to reference
     public static final String MOD_ID = "tutorialmod";
-    private static final Logger LOGGER = LogUtils.getLogger();
+    public static final String LOGGER_PREFIX = "[Tutorialmod]";
+    public static final Logger LOGGER = LogUtils.getLogger();
     public Tutorialmod()
     {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
