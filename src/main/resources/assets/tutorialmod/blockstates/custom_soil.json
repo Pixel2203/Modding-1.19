@@ -3,8 +3,23 @@
     "soil=false": {
       "model": "tutorialmod:block/custom_soil"
     },
-    "soil=true": {
-      "model": "tutorialmod:block/custom_soil_active"
+    "soil=true,fertile=0": {
+      "model": "tutorialmod:block/custom_farmland"
+    },
+    "soil=true,fertile=1": {
+      "model": "tutorialmod:block/custom_farmland_moist"
+    },
+    "soil=true,fertile=2": {
+      "model": "tutorialmod:block/custom_farmland_moist"
+    },
+    "soil=true,fertile=3": {
+      "model": "tutorialmod:block/custom_farmland_moist"
+    },
+    "soil=true,fertile=4": {
+      "model": "tutorialmod:block/custom_farmland_moist"
+    },
+    "soil=true,fertile=5": {
+      "model": "tutorialmod:block/custom_farmland_moist"
     }
   }
 }

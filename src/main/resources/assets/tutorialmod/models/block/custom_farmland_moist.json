@@ -5,7 +5,8 @@
     "south": "tutorialmod:block/custom_soil",
     "west": "tutorialmod:block/custom_soil",
     "east": "tutorialmod:block/custom_soil",
-    "up": "tutorialmod:block/powered_farmland",
-    "down": "tutorialmod:block/custom_soil"
+    "up": "tutorialmod:block/custom_farmland_moist",
+    "down": "tutorialmod:block/custom_soil",
+    "particle": "tutorialmod:block/custom_soil"
   }
 }

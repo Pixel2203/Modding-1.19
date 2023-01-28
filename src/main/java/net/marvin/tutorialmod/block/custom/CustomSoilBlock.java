@@ -11,6 +11,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.HoeItem;
 import net.minecraft.world.item.ItemStack;
@@ -37,8 +38,9 @@ public class CustomSoilBlock extends Block {
     public CustomSoilBlock(Properties p_49795_) {
         super(p_49795_);
         registerDefaultState(
-         this.stateDefinition.any().setValue(ISSOIL,false).setValue(FERTILE,0)
+                this.stateDefinition.any().setValue(ISSOIL, false).setValue(FERTILE, 0)
         );
+
     }
 
 
@@ -50,35 +52,35 @@ public class CustomSoilBlock extends Block {
 
     @Override
     public void randomTick(BlockState blockState, ServerLevel level, BlockPos pos, RandomSource source) {
-        Tutorialmod.LOGGER.info(Tutorialmod.LOGGER_PREFIX + " RandomTick!");
         BlockState plantState = level.getBlockState(pos.above());
 
         if(plantState.getBlock() instanceof IPlantable){
-            Tutorialmod.LOGGER.info(Tutorialmod.LOGGER_PREFIX + " Pflanze auf diesem Block entdeckt!");
-            Property<Integer> ageProperty = ((CropBlock)plantState.getBlock()).getAgeProperty();
-            int plantAge = plantState.getValue(ageProperty);
-            int maxAge = ((CropBlock) plantState.getBlock()).getMaxAge();
-            if(plantAge < maxAge){
-                if(blockState.getValue(FERTILE) > 0){
-                    level.setBlock(pos,blockState.setValue(FERTILE,blockState.getValue(FERTILE)-1),3);
-                    level.setBlock(pos.above(),plantState.setValue(ageProperty, plantAge+1),3);
-                    level.addParticle(
-                            ParticleTypes.PORTAL,
-                            pos.getX(),
-                            pos.getY(),
-                            pos.getZ(),
-                            0,
-                            0,
-                            0
-
-                    );
-                    Tutorialmod.LOGGER.info(Tutorialmod.LOGGER_PREFIX + " Particle Spawned at " + pos);
-
-                }
+            growPlant(blockState,level,pos);
+        }
+        super.randomTick(blockState,level,pos,source);
+    }
+    private void growPlant(BlockState blockState, ServerLevel level, BlockPos pos){
+        BlockState plantState = level.getBlockState(pos.above());
+        BlockPos plantPos = pos.above();
+        Property<Integer> ageProperty = ((CropBlock)plantState.getBlock()).getAgeProperty();
+        int plantAge = plantState.getValue(ageProperty);
+        int maxAge = ((CropBlock) plantState.getBlock()).getMaxAge();
+        if(plantAge < maxAge){
+            if(blockState.getValue(FERTILE) > 0){
+                level.setBlock(pos,blockState.setValue(FERTILE,blockState.getValue(FERTILE)-1),3);
+                level.setBlock(pos.above(),plantState.setValue(ageProperty, plantAge+1),3);
+                level.addParticle(
+                        ParticleTypes.BUBBLE,
+                        plantPos.getX()+1,
+                        plantPos.getY()+1,
+                        plantPos.getZ()+1,
+                        1,
+                        1,
+                        1
+                );
+                Tutorialmod.LOGGER.info(Tutorialmod.LOGGER_PREFIX + " Particle Spawned at " + pos);
 
             }
-
-
 
         }
     }
@@ -99,20 +101,11 @@ public class CustomSoilBlock extends Block {
             }
             // Handling Bone Meal Behaviour
             if(itemstack.getItem() == Items.BONE_MEAL && isSoil){
-                return handleBonemealBehaviour(itemstack,pos,state,level);
+                return handleBonemealBehaviour(itemstack,pos,state,level,player);
             }
 
         }
         return super.use(state,level,pos,player,interactionHand,result);
-    }
-    private InteractionResult handleBonemealBehaviour(ItemStack itemStack, BlockPos pos, BlockState blockState, Level level){
-        int fertility = blockState.getValue(FERTILE);
-        if(fertility <FERTILE_MAX){
-            fertility++;
-            level.setBlock(pos,blockState.setValue(FERTILE,fertility),3);
-            return InteractionResult.SUCCESS;
-        }
-        return InteractionResult.PASS;
     }
 
     @Override
@@ -128,6 +121,19 @@ public class CustomSoilBlock extends Block {
     }
 
 
+    private InteractionResult handleBonemealBehaviour(ItemStack itemStack, BlockPos pos, BlockState blockState, Level level, Player player){
+        int fertility = blockState.getValue(FERTILE);
+        if(fertility <FERTILE_MAX){
+            fertility++;
+            level.setBlock(pos,blockState.setValue(FERTILE,fertility),3);
+            Inventory playerInv = player.getInventory();
+            int selectedHotbarSlot = playerInv.selected;
+            itemStack.shrink(1);
+            player.setItemInHand(InteractionHand.MAIN_HAND,itemStack);
+            return InteractionResult.SUCCESS;
+        }
+        return InteractionResult.PASS;
+    }
     private void turnToSoil(BlockState state, Level level, BlockPos pos, Player player){
         level.setBlock(pos,state.setValue(ISSOIL,true),3);
         player.playSound(SoundEvents.HOE_TILL);

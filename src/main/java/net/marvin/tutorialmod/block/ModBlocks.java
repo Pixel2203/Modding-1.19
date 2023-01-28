@@ -4,6 +4,8 @@ package net.marvin.tutorialmod.block;
 import net.marvin.tutorialmod.block.custom.BlueBerryCrop;
 import net.marvin.tutorialmod.block.custom.CustomSoilBlock;
 import net.marvin.tutorialmod.block.custom.FishHook;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.valueproviders.UniformInt;
 
 import net.minecraft.world.level.block.*;
@@ -27,7 +29,13 @@ public class ModBlocks {
     public static final CropBlock BLUEBERRY_CROP_BLK =
             new BlueBerryCrop(BlockBehaviour.Properties.copy(Blocks.WHEAT));
     public static final Block CUSTOM_SOIL_BLK =
-            new CustomSoilBlock(BlockBehaviour.Properties.of(Material.DIRT).randomTicks());
+            new CustomSoilBlock(BlockBehaviour.Properties.of(Material.DIRT)
+                    .randomTicks()
+                    .strength(.5f)
+                    .sound(SoundType.ROOTED_DIRT)
+
+
+            );
 
 
 

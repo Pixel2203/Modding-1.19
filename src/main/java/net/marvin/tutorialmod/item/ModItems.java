@@ -1,13 +1,10 @@
 package net.marvin.tutorialmod.item;
 
 import net.marvin.tutorialmod.block.BlockRegistry;
-import net.marvin.tutorialmod.block.ModBlocks;
 import net.marvin.tutorialmod.item.custom.EightBallItem;
-import net.marvin.tutorialmod.item.custom.tools.ZirconHoeItem;
 import net.marvin.tutorialmod.materials.ModMaterials;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.food.FoodProperties;
-import net.minecraft.world.food.Foods;
 import net.minecraft.world.item.*;
 
 public class ModItems {
@@ -35,7 +32,7 @@ public class ModItems {
                     new Item.Properties().tab(ModCreativeModeTab.TUTORIAL_TAB)
             );
     public static final HoeItem ZIRCON_HOE_ITM =
-            new ZirconHoeItem(
+            new HoeItem(
                     Tiers.DIAMOND,
                     50,
                     75,
