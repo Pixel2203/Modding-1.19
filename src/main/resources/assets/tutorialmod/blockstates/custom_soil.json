@@ -1,5 +1,10 @@
 {
   "variants": {
-    "": {"model":  "tutorialmod:block/custom_soil"}
+    "soil=false": {
+      "model": "tutorialmod:block/custom_soil"
+    },
+    "soil=true": {
+      "model": "tutorialmod:block/custom_soil_active"
+    }
   }
 }
