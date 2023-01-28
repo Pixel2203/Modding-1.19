@@ -86,34 +86,33 @@ public class CustomSoilBlock extends Block {
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand interactionHand, BlockHitResult result) {
         if(interactionHand == InteractionHand.MAIN_HAND){
-            ItemStack item = player.getItemInHand(interactionHand);
-            if(item.getItem() instanceof HoeItem){
-                if(!state.getValue(ISSOIL)){
+            boolean isSoil = state.getValue(ISSOIL);
+
+            // Handling Hoe Behaviour
+            ItemStack itemstack = player.getItemInHand(interactionHand);
+            if(itemstack.getItem() instanceof HoeItem){
+                if(!isSoil){
                     turnToSoil(state,level,pos,player);
                     return  InteractionResult.SUCCESS;
                 }
                 return InteractionResult.PASS;
-            }else if(item.getItem() == Items.BONE_MEAL){
-                if(state.getValue(ISSOIL) && !(state.getValue(FERTILE) == FERTILE_MAX)){
-                    if(item.getCount() == 0){
-                        player.getInventory().removeItem(item);
-                    }else{
-                        item.setCount(item.getCount()-1);
-                        player.getInventory()
-                                .setItem(player.getInventory()
-                                                .findSlotMatchingItem(item),
-                                        item);
-                    }
-
-                    level.setBlock(pos,state.setValue(FERTILE,state.getValue(FERTILE)+1), 3);
-
-                    return InteractionResult.SUCCESS;
-                }else{
-                    return InteractionResult.PASS;
-                }
             }
+            // Handling Bone Meal Behaviour
+            if(itemstack.getItem() == Items.BONE_MEAL && isSoil){
+                return handleBonemealBehaviour(itemstack,pos,state,level);
+            }
+
         }
         return super.use(state,level,pos,player,interactionHand,result);
+    }
+    private InteractionResult handleBonemealBehaviour(ItemStack itemStack, BlockPos pos, BlockState blockState, Level level){
+        int fertility = blockState.getValue(FERTILE);
+        if(fertility <FERTILE_MAX){
+            fertility++;
+            level.setBlock(pos,blockState.setValue(FERTILE,fertility),3);
+            return InteractionResult.SUCCESS;
+        }
+        return InteractionResult.PASS;
     }
 
     @Override
