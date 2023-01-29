@@ -2,6 +2,7 @@ package net.marvin.tutorialmod.item;
 
 import net.marvin.tutorialmod.block.BlockRegistry;
 import net.marvin.tutorialmod.item.custom.EightBallItem;
+import net.marvin.tutorialmod.item.custom.FertilizerItem;
 import net.marvin.tutorialmod.materials.ModMaterials;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.food.FoodProperties;
@@ -100,6 +101,10 @@ public class ModItems {
     // Custom Items
     public static final Item CUSTOM_MODEL_TEST_ITM =
             new Item(
+                    new Item.Properties().tab(ModCreativeModeTab.TUTORIAL_TAB)
+            );
+    public static final Item FERTILIZER_ITM =
+            new FertilizerItem(
                     new Item.Properties().tab(ModCreativeModeTab.TUTORIAL_TAB)
             );
 
