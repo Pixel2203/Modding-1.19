@@ -87,7 +87,6 @@ public class ModItems {
             new Item(
                     new Item.Properties().tab(ModCreativeModeTab.TUTORIAL_TAB).food(new FoodProperties.Builder().nutrition(3).saturationMod(3).build())
             );
-
     // Ores and Ingots
     public static final Item ZIRCON_ITM =
             new Item(
@@ -107,6 +106,22 @@ public class ModItems {
             new FertilizerItem(
                     new Item.Properties().tab(ModCreativeModeTab.TUTORIAL_TAB)
             );
+
+
+    public static final Item RASPBERRY_ITM =
+            new Item(
+                    new Item.Properties().tab(ModCreativeModeTab.TUTORIAL_TAB)
+                            .food(new FoodProperties.Builder()
+                                    .nutrition(3)
+                                    .saturationMod(3).build())
+            );
+
+    public static final Item RASPBERRY_BUSH_ITM =
+            new ItemNameBlockItem(
+                    BlockRegistry.RASPBERRY_BUSH.get(),
+                    new Item.Properties().tab(ModCreativeModeTab.TUTORIAL_TAB)
+            );
+
 
 
 }

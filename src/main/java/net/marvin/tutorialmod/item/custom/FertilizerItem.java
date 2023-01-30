@@ -26,6 +26,7 @@ public class FertilizerItem extends Item {
         InteractionHand interactionHand = context.getHand();
 
         if(context.getPlayer() != null &&
+                !level.isClientSide() &&
                 interactionHand == InteractionHand.MAIN_HAND &&
                 blockState.getBlock() == ModBlocks.CUSTOM_SOIL_BLK &&
                 blockState.getValue(CustomSoilBlock.ISFARMLAND) &&

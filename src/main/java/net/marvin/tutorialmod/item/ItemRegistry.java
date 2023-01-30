@@ -31,6 +31,7 @@ public class ItemRegistry {
     public static final RegistryObject<Item> BLUEBERRY =
             ITEMS.register("blueberry", () -> ModItems.BLUEBERRY_ITM);
 
+
     public static final RegistryObject<ArmorItem> ZIRCON_HELMET =
             ITEMS.register("zircon_helmet",() -> ModItems.ZIRCON_HELMET_ITM);
     public static final RegistryObject<ArmorItem> ZIRCON_CHESTPLATE =
@@ -58,6 +59,11 @@ public class ItemRegistry {
     public static final RegistryObject<Item> FERTILIZER =
             ITEMS.register("fertilizer", () -> ModItems.FERTILIZER_ITM);
 
+
+    public static final RegistryObject<Item> RASPBERRY =
+            ITEMS.register("raspberry", () -> ModItems.RASPBERRY_ITM);
+    public static final RegistryObject<Item> RASPBERRY_BUSH =
+            ITEMS.register("raspberry_bush", () -> ModItems.RASPBERRY_BUSH_ITM);
 
     public static void register(IEventBus eventBus){
         ITEMS.register(eventBus);

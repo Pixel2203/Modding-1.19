@@ -59,6 +59,7 @@ public class CustomSoilBlock extends Block {
 
     @Override
     public void randomTick(BlockState blockState, ServerLevel level, BlockPos pos, RandomSource source) {
+
         BlockState plantState = level.getBlockState(pos.above());
 
         if(plantState.getBlock() instanceof IPlantable){
@@ -68,26 +69,11 @@ public class CustomSoilBlock extends Block {
         }
         super.randomTick(blockState,level,pos,source);
     }
-    private void growPlant(BlockState blockState, ServerLevel level, BlockPos pos){
-        BlockState plantState = level.getBlockState(pos.above());
-        Property<Integer> ageProperty = ((CropBlock)plantState.getBlock()).getAgeProperty();
-        int plantAge = plantState.getValue(ageProperty);
-        int maxAge = ((CropBlock) plantState.getBlock()).getMaxAge();
-        if(plantAge < maxAge){
-            if(blockState.getValue(FERTILITY) > 0){
-                boolean isfertilized = blockState.getValue(FERTILITY) > 1;
-                level.setBlock(pos,blockState.setValue(FERTILITY,blockState.getValue(FERTILITY)-1)
-                        .setValue(ISFERTILIZED, isfertilized ),3);
-                level.setBlock(pos.above(),plantState.setValue(ageProperty, plantAge+1),3);
-            }
-
-        }
-    }
-
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand interactionHand, BlockHitResult result) {
             ItemStack itemstack = player.getItemInHand(interactionHand);
             if(interactionHand == InteractionHand.MAIN_HAND &&
+                    !level.isClientSide() &&
                     itemstack.getItem() instanceof HoeItem){
 
                 if(state.getValue(ISFARMLAND)){
@@ -111,6 +97,7 @@ public class CustomSoilBlock extends Block {
         }
         return super.canSustainPlant(state, world, pos, facing, plantable);
     }
+
     private void turnToFarmland(BlockState state, Level level, BlockPos pos, Player player){
         level.setBlock(pos,state.setValue(ISFARMLAND,true),3);
         player.playSound(SoundEvents.HOE_TILL);
@@ -122,5 +109,20 @@ public class CustomSoilBlock extends Block {
                     .setValue(ISFARMLAND,false),
                 3
         );
+    }
+    private void growPlant(BlockState blockState, ServerLevel level, BlockPos pos){
+        BlockState plantState = level.getBlockState(pos.above());
+        Property<Integer> ageProperty = ((CropBlock)plantState.getBlock()).getAgeProperty();
+        int plantAge = plantState.getValue(ageProperty);
+        int maxAge = ((CropBlock) plantState.getBlock()).getMaxAge();
+        if(plantAge < maxAge){
+            if(blockState.getValue(FERTILITY) > 0){
+                boolean isfertilized = blockState.getValue(FERTILITY) > 1;
+                level.setBlock(pos,blockState.setValue(FERTILITY,blockState.getValue(FERTILITY)-1)
+                        .setValue(ISFERTILIZED, isfertilized ),3);
+                level.setBlock(pos.above(),plantState.setValue(ageProperty, plantAge+1),3);
+            }
+
+        }
     }
 }
