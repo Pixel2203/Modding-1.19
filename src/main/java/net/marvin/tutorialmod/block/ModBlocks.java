@@ -1,9 +1,10 @@
 package net.marvin.tutorialmod.block;
 
 
-import net.marvin.tutorialmod.block.custom.BlueBerryCrop;
+import net.marvin.tutorialmod.block.custom.crops.BlueBerryCrop;
 import net.marvin.tutorialmod.block.custom.CustomSoilBlock;
 import net.marvin.tutorialmod.block.custom.FishHook;
+import net.marvin.tutorialmod.block.custom.crops.RaspberryBushBlock;
 import net.minecraft.util.valueproviders.UniformInt;
 
 import net.minecraft.world.level.block.*;
@@ -27,8 +28,18 @@ public class ModBlocks {
     public static final CropBlock BLUEBERRY_CROP_BLK =
             new BlueBerryCrop(BlockBehaviour.Properties.copy(Blocks.WHEAT));
     public static final Block CUSTOM_SOIL_BLK =
-            new CustomSoilBlock(BlockBehaviour.Properties.of(Material.DIRT).randomTicks());
+            new CustomSoilBlock(BlockBehaviour.Properties.of(Material.DIRT)
+                    .randomTicks()
+                    .strength(.5f)
+                    .sound(SoundType.ROOTED_DIRT)
 
+
+            );
+    public static final BushBlock RASPBERRY_BUSH_BLK =
+            new RaspberryBushBlock(BlockBehaviour.Properties.copy(Blocks.SWEET_BERRY_BUSH)
+                    .randomTicks()
+                    .instabreak()
+                    .sound(SoundType.GRASS));
 
 
 
