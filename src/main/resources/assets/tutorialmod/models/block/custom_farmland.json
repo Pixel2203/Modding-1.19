@@ -1,0 +1,12 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "north": "tutorialmod:block/custom_soil",
+    "south": "tutorialmod:block/custom_soil",
+    "west": "tutorialmod:block/custom_soil",
+    "east": "tutorialmod:block/custom_soil",
+    "up": "tutorialmod:block/custom_farmland",
+    "down": "tutorialmod:block/custom_soil",
+    "particle": "tutorialmod:block/custom_soil"
+  }
+}

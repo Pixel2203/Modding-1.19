@@ -1,20 +1,16 @@
 package net.marvin.tutorialmod.block.custom;
 
-import net.marvin.tutorialmod.Tutorialmod;
-import net.minecraft.client.particle.Particle;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.particles.ParticleOptions;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.HoeItem;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -29,108 +25,104 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.common.IPlantable;
 
 public class CustomSoilBlock extends Block {
-    public static final BooleanProperty ISSOIL = BooleanProperty.create("soil");
-    private static final int FERTILE_MAX = 5;
-    public static final IntegerProperty FERTILE = IntegerProperty.create("fertile",0,FERTILE_MAX);
-
+    public static final BooleanProperty ISFARMLAND = BooleanProperty.create("isfarmland");
+    public static final int FERTILITY_MAX = 50;
+    public static final IntegerProperty FERTILITY = IntegerProperty.create("fertility",0, FERTILITY_MAX);
+    public static final BooleanProperty ISFERTILIZED = BooleanProperty.create("isfertilized");
 
     public CustomSoilBlock(Properties p_49795_) {
         super(p_49795_);
         registerDefaultState(
-         this.stateDefinition.any().setValue(ISSOIL,false).setValue(FERTILE,0)
+                this.stateDefinition.any()
+                        .setValue(ISFARMLAND, false)
+                        .setValue(FERTILITY, 0)
+                        .setValue(ISFERTILIZED,false)
         );
+
     }
 
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(ISSOIL);
-        builder.add(FERTILE);
+        builder.add(ISFARMLAND);
+        builder.add(FERTILITY);
+        builder.add(ISFERTILIZED);
+    }
+
+    @Override
+    public void fallOn(Level level, BlockState blockState, BlockPos blockPos, Entity entity, float p_152430_) {
+        if(blockState.getValue(ISFARMLAND)){
+            turnToDirt(blockPos,blockState,level);
+        }
+        super.fallOn(level, blockState, blockPos, entity, p_152430_);
     }
 
     @Override
     public void randomTick(BlockState blockState, ServerLevel level, BlockPos pos, RandomSource source) {
-        Tutorialmod.LOGGER.info(Tutorialmod.LOGGER_PREFIX + " RandomTick!");
+
         BlockState plantState = level.getBlockState(pos.above());
 
         if(plantState.getBlock() instanceof IPlantable){
-            Tutorialmod.LOGGER.info(Tutorialmod.LOGGER_PREFIX + " Pflanze auf diesem Block entdeckt!");
-            Property<Integer> ageProperty = ((CropBlock)plantState.getBlock()).getAgeProperty();
-            int plantAge = plantState.getValue(ageProperty);
-            int maxAge = ((CropBlock) plantState.getBlock()).getMaxAge();
-            if(plantAge < maxAge){
-                if(blockState.getValue(FERTILE) > 0){
-                    level.setBlock(pos,blockState.setValue(FERTILE,blockState.getValue(FERTILE)-1),3);
-                    level.setBlock(pos.above(),plantState.setValue(ageProperty, plantAge+1),3);
-                    level.addParticle(
-                            ParticleTypes.PORTAL,
-                            pos.getX(),
-                            pos.getY(),
-                            pos.getZ(),
-                            0,
-                            0,
-                            0
-
-                    );
-                    Tutorialmod.LOGGER.info(Tutorialmod.LOGGER_PREFIX + " Particle Spawned at " + pos);
-
-                }
-
-            }
-
-
-
+            growPlant(blockState,level,pos);
+        }else if(blockState.getValue(FERTILITY) == 0){
+            turnToDirt(pos,blockState,level);
         }
+        super.randomTick(blockState,level,pos,source);
     }
-
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand interactionHand, BlockHitResult result) {
-        if(interactionHand == InteractionHand.MAIN_HAND){
-            ItemStack item = player.getItemInHand(interactionHand);
-            if(item.getItem() instanceof HoeItem){
-                if(!state.getValue(ISSOIL)){
-                    turnToSoil(state,level,pos,player);
-                    return  InteractionResult.SUCCESS;
-                }
-                return InteractionResult.PASS;
-            }else if(item.getItem() == Items.BONE_MEAL){
-                if(state.getValue(ISSOIL) && !(state.getValue(FERTILE) == FERTILE_MAX)){
-                    if(item.getCount() == 0){
-                        player.getInventory().removeItem(item);
-                    }else{
-                        item.setCount(item.getCount()-1);
-                        player.getInventory()
-                                .setItem(player.getInventory()
-                                                .findSlotMatchingItem(item),
-                                        item);
-                    }
+            ItemStack itemstack = player.getItemInHand(interactionHand);
+            if(interactionHand == InteractionHand.MAIN_HAND &&
+                    !level.isClientSide() &&
+                    itemstack.getItem() instanceof HoeItem){
 
-                    level.setBlock(pos,state.setValue(FERTILE,state.getValue(FERTILE)+1), 3);
-
-                    return InteractionResult.SUCCESS;
-                }else{
-                    return InteractionResult.PASS;
+                if(state.getValue(ISFARMLAND)){
+                    return  InteractionResult.PASS;
                 }
+
+                turnToFarmland(state,level,pos,player);
+                return InteractionResult.SUCCESS;
             }
-        }
         return super.use(state,level,pos,player,interactionHand,result);
     }
 
     @Override
     public boolean canSustainPlant(BlockState state, BlockGetter world, BlockPos pos, Direction facing, IPlantable plantable) {
-        if(!state.getValue(ISSOIL)){
+        if(!state.getValue(ISFARMLAND)){
            return false;
         }
         Block plant = plantable.getPlant(world,pos).getBlock();
-        if(plant == Blocks.CARROTS){
+        if(plant == Blocks.CARROTS || plant instanceof CropBlock){
             return true;
         }
         return super.canSustainPlant(state, world, pos, facing, plantable);
     }
 
-
-    private void turnToSoil(BlockState state, Level level, BlockPos pos, Player player){
-        level.setBlock(pos,state.setValue(ISSOIL,true),3);
+    private void turnToFarmland(BlockState state, Level level, BlockPos pos, Player player){
+        level.setBlock(pos,state.setValue(ISFARMLAND,true),3);
         player.playSound(SoundEvents.HOE_TILL);
+    }
+    private void turnToDirt(BlockPos blockPos, BlockState blockState, Level level){
+        level.setBlock(
+          blockPos,
+          blockState.setValue(FERTILITY,0)
+                    .setValue(ISFARMLAND,false),
+                3
+        );
+    }
+    private void growPlant(BlockState blockState, ServerLevel level, BlockPos pos){
+        BlockState plantState = level.getBlockState(pos.above());
+        Property<Integer> ageProperty = ((CropBlock)plantState.getBlock()).getAgeProperty();
+        int plantAge = plantState.getValue(ageProperty);
+        int maxAge = ((CropBlock) plantState.getBlock()).getMaxAge();
+        if(plantAge < maxAge){
+            if(blockState.getValue(FERTILITY) > 0){
+                boolean isfertilized = blockState.getValue(FERTILITY) > 1;
+                level.setBlock(pos,blockState.setValue(FERTILITY,blockState.getValue(FERTILITY)-1)
+                        .setValue(ISFERTILIZED, isfertilized ),3);
+                level.setBlock(pos.above(),plantState.setValue(ageProperty, plantAge+1),3);
+            }
+
+        }
     }
 }

@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "harvestable=false" : {
+      "model": "tutorialmod:block/raspberry_bush"
+    },
+    "harvestable=true": {
+      "model": "tutorialmod:block/raspberry_bush_grown"
+    }
+  }
+}
