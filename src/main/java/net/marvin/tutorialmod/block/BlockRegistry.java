@@ -9,6 +9,7 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 
+import net.minecraft.world.level.block.FarmBlock;
 import net.minecraftforge.eventbus.api.IEventBus;
 
 import net.minecraftforge.registries.DeferredRegister;
@@ -46,6 +47,9 @@ public class BlockRegistry {
             registerBlock("custom_soil",
                     () -> ModBlocks.CUSTOM_SOIL_BLK,
                     ModCreativeModeTab.TUTORIAL_TAB);
+    public static final RegistryObject<Block> CUSTOM_FARMBLOCK =
+            BLOCKS.register("custom_farmland",
+                    () -> ModBlocks.CUSTOM_FARMLAND_BLK);
 
     public static final RegistryObject<Block> RASPBERRY_BUSH =
             BLOCKS.register("raspberry_bush",

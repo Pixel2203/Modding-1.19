@@ -1,13 +1,7 @@
 {
   "variants": {
-    "isfarmland=false": {
+    "": {
       "model": "tutorialmod:block/custom_soil"
-    },
-    "isfarmland=true,isfertilized=false": {
-      "model": "tutorialmod:block/custom_farmland"
-    },
-    "isfarmland=true,isfertilized=true": {
-      "model": "tutorialmod:block/custom_farmland_moist"
     }
   }
 }

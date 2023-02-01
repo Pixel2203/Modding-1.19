@@ -1,8 +1,11 @@
 package net.marvin.tutorialmod.item;
 
+import net.marvin.tutorialmod.item.custom.drugs.CustomPillProperties;
+import net.marvin.tutorialmod.item.custom.drugs.PillItem;
 import net.marvin.tutorialmod.block.BlockRegistry;
 import net.marvin.tutorialmod.item.custom.EightBallItem;
 import net.marvin.tutorialmod.item.custom.FertilizerItem;
+
 import net.marvin.tutorialmod.materials.ModMaterials;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.food.FoodProperties;
@@ -120,6 +123,19 @@ public class ModItems {
             new ItemNameBlockItem(
                     BlockRegistry.RASPBERRY_BUSH.get(),
                     new Item.Properties().tab(ModCreativeModeTab.TUTORIAL_TAB)
+            );
+
+    public static final Item CAFFEINE_PILL_ITM =
+            new PillItem(
+                    CustomPillProperties.CAFFEINE_PILL_PROPERTIES,
+                    1,
+                    25
+            );
+    public static final Item PAINKILLER_PILL_ITM =
+            new PillItem(
+                    CustomPillProperties.PAINKILLER_PILL_PROPERTIES,
+                    1,
+                    25
             );
 
 

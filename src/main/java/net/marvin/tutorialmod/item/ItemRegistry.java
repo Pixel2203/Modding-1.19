@@ -64,6 +64,10 @@ public class ItemRegistry {
             ITEMS.register("raspberry", () -> ModItems.RASPBERRY_ITM);
     public static final RegistryObject<Item> RASPBERRY_BUSH =
             ITEMS.register("raspberry_bush", () -> ModItems.RASPBERRY_BUSH_ITM);
+    public static final RegistryObject<Item> CAFFEINE_PILL =
+            ITEMS.register("caffeine_pill", () -> ModItems.CAFFEINE_PILL_ITM);
+    public static final RegistryObject<Item> PAINKILLER_PILL =
+            ITEMS.register("painkiller_pill", () -> ModItems.PAINKILLER_PILL_ITM);
 
     public static void register(IEventBus eventBus){
         ITEMS.register(eventBus);

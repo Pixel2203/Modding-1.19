@@ -3,7 +3,7 @@ package net.marvin.tutorialmod.block;
 
 import net.marvin.tutorialmod.block.custom.crops.BlueBerryCrop;
 import net.marvin.tutorialmod.block.custom.CustomSoilBlock;
-import net.marvin.tutorialmod.block.custom.FishHook;
+import net.marvin.tutorialmod.block.custom.crops.CustomFarmlandBlock;
 import net.marvin.tutorialmod.block.custom.crops.RaspberryBushBlock;
 import net.minecraft.util.valueproviders.UniformInt;
 
@@ -24,9 +24,10 @@ public class ModBlocks {
 
     // Custom
     public static final Block FISHHOOK_BLK =
-            new FishHook(BlockBehaviour.Properties.of(Material.STONE).strength(6f));
+            new Block(BlockBehaviour.Properties.of(Material.STONE).strength(6f));
     public static final CropBlock BLUEBERRY_CROP_BLK =
             new BlueBerryCrop(BlockBehaviour.Properties.copy(Blocks.WHEAT));
+
     public static final Block CUSTOM_SOIL_BLK =
             new CustomSoilBlock(BlockBehaviour.Properties.of(Material.DIRT)
                     .randomTicks()
@@ -35,6 +36,11 @@ public class ModBlocks {
 
 
             );
+    public static final Block CUSTOM_FARMLAND_BLK =
+            new CustomFarmlandBlock(BlockBehaviour.Properties.of(Material.DIRT)
+                    .randomTicks().strength(.5f).sound(SoundType.GRASS)
+            );
+
     public static final BushBlock RASPBERRY_BUSH_BLK =
             new RaspberryBushBlock(BlockBehaviour.Properties.copy(Blocks.SWEET_BERRY_BUSH)
                     .randomTicks()

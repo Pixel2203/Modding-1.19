@@ -2,6 +2,7 @@ package net.marvin.tutorialmod.item.custom;
 
 import net.marvin.tutorialmod.block.ModBlocks;
 import net.marvin.tutorialmod.block.custom.CustomSoilBlock;
+import net.marvin.tutorialmod.block.custom.crops.CustomFarmlandBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -28,9 +29,8 @@ public class FertilizerItem extends Item {
         if(context.getPlayer() != null &&
                 !level.isClientSide() &&
                 interactionHand == InteractionHand.MAIN_HAND &&
-                blockState.getBlock() == ModBlocks.CUSTOM_SOIL_BLK &&
-                blockState.getValue(CustomSoilBlock.ISFARMLAND) &&
-                blockState.getValue(CustomSoilBlock.FERTILITY) < CustomSoilBlock.FERTILITY_MAX){
+                blockState.getBlock() == ModBlocks.CUSTOM_FARMLAND_BLK &&
+                blockState.getValue(CustomFarmlandBlock.FERTILITY) < CustomFarmlandBlock.FERTILITY_MAX){
 
             adjustItemStack(context.getPlayer(),context.getItemInHand(),interactionHand);
             return fertilizeBlock(clickedPos, blockState, level);
@@ -45,12 +45,12 @@ public class FertilizerItem extends Item {
     }
 
     private InteractionResult fertilizeBlock(BlockPos blockPos, BlockState blockState, Level level) {
-        if(blockState.getValue(CustomSoilBlock.FERTILITY) < CustomSoilBlock.FERTILITY_MAX){
-            int currentFertility = blockState.getValue(CustomSoilBlock.FERTILITY);
+        if(blockState.getValue(CustomFarmlandBlock.FERTILITY) < CustomFarmlandBlock.FERTILITY_MAX){
+            int currentFertility = blockState.getValue(CustomFarmlandBlock.FERTILITY);
             int updatedFertility =
-                    Math.min((currentFertility + FERTILITY_INCREASE_PER_USE), CustomSoilBlock.FERTILITY_MAX);
-            blockState = blockState.setValue(CustomSoilBlock.FERTILITY, updatedFertility);
-            blockState = blockState.setValue(CustomSoilBlock.ISFERTILIZED,true);
+                    Math.min((currentFertility + FERTILITY_INCREASE_PER_USE), CustomFarmlandBlock.FERTILITY_MAX);
+            blockState = blockState.setValue(CustomFarmlandBlock.FERTILITY, updatedFertility);
+            blockState = blockState.setValue(CustomFarmlandBlock.FERTILIZED,true);
             level.setBlock(
                     blockPos,
                     blockState,
