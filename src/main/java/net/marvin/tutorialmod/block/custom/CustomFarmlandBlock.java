@@ -1,4 +1,4 @@
-package net.marvin.tutorialmod.block.custom.crops;
+package net.marvin.tutorialmod.block.custom;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -58,18 +58,18 @@ public class CustomFarmlandBlock extends Block {
         super.randomTick(blockState, level, pos, source);
     }
 
-        private void growPlant(BlockState blockState, ServerLevel level, BlockPos pos){
+    private void growPlant(BlockState blockState, ServerLevel level, BlockPos pos){
         BlockState plantState = level.getBlockState(pos.above());
-            Property<Integer> ageProperty = ((CropBlock) plantState.getBlock()).getAgeProperty();
+        Property<Integer> ageProperty = ((CropBlock) plantState.getBlock()).getAgeProperty();
         int plantAge = plantState.getValue(ageProperty);
         int maxAge = ((CropBlock) plantState.getBlock()).getMaxAge();
         if(plantAge < maxAge){
             if(blockState.getValue(FERTILITY) > 0){
-                boolean isfertilized = blockState.getValue(FERTILITY) > 1;
+                boolean fertilized = blockState.getValue(FERTILITY) > 1;
                 level.setBlock(pos,blockState.setValue(FERTILITY,blockState.getValue(FERTILITY)-1)
-                        .setValue(FERTILIZED, isfertilized ),3);
+                                                            .setValue(FERTILIZED, fertilized ),3);
                 level.setBlock(pos.above(),plantState.setValue(ageProperty, plantAge+1),3);
-            }
+                }
 
         }
     }

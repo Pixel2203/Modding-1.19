@@ -1,8 +1,7 @@
 package net.marvin.tutorialmod.item.custom;
 
 import net.marvin.tutorialmod.block.ModBlocks;
-import net.marvin.tutorialmod.block.custom.CustomSoilBlock;
-import net.marvin.tutorialmod.block.custom.crops.CustomFarmlandBlock;
+import net.marvin.tutorialmod.block.custom.CustomFarmlandBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;

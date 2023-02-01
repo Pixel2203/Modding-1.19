@@ -1,7 +1,6 @@
 package net.marvin.tutorialmod.block.custom.crops;
 
 import net.marvin.tutorialmod.item.ItemRegistry;
-import net.marvin.tutorialmod.item.ModItems;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.CropBlock;
@@ -9,9 +8,9 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 
-public class BlueBerryCrop extends CropBlock {
+public class BlueBerryCropBlock extends CropBlock {
     public static final IntegerProperty AGE = IntegerProperty.create("age",0,7);
-    public BlueBerryCrop(Properties properties) {
+    public BlueBerryCropBlock(Properties properties) {
         super(properties);
         registerDefaultState(
                 this.stateDefinition.any().setValue(AGE,0)
