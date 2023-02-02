@@ -22,14 +22,14 @@ public class CustomSoilBlock extends Block {
             if(interactionHand == InteractionHand.MAIN_HAND &&
                     !level.isClientSide() &&
                     itemstack.getItem() instanceof HoeItem){
-                turnToFarmland(state,level,pos,player);
+                turnToFarmland(level,pos,player);
                 return InteractionResult.SUCCESS;
             }
         return super.use(state,level,pos,player,interactionHand,result);
     }
 
 
-    private void turnToFarmland(BlockState state, Level level, BlockPos pos, Player player){
+    private void turnToFarmland(Level level, BlockPos pos, Player player){
         level.setBlock(pos, ModBlocks.CUSTOM_FARMLAND_BLK.defaultBlockState(), 3);
         player.playSound(SoundEvents.HOE_TILL);
     }
