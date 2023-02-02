@@ -6,6 +6,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.CropBlock;
@@ -52,7 +53,7 @@ public class CustomFarmlandBlock extends Block {
         if (plantState.getBlock() instanceof IPlantable) {
 
             growPlant(blockState, level, pos);
-        } else if (blockState.getValue(FERTILITY) == 0) {
+        } else if (willSurvive(pos,blockState,level)) {
             turnToDirt(pos, blockState, level);
         }
         super.randomTick(blockState, level, pos, source);
@@ -70,7 +71,6 @@ public class CustomFarmlandBlock extends Block {
                                                             .setValue(FERTILIZED, fertilized ),3);
                 level.setBlock(pos.above(),plantState.setValue(ageProperty, plantAge+1),3);
                 }
-
         }
     }
 
@@ -82,4 +82,8 @@ public class CustomFarmlandBlock extends Block {
         }
         return super.canSustainPlant(state, world, pos, facing, plantable);
     }
+    private boolean willSurvive(BlockPos pos, BlockState blockState, Level level){
+        return blockState.getValue(FERTILIZED);
+    }
+
 }

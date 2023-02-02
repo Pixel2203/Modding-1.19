@@ -37,14 +37,21 @@ public class CustomPillProperties {
                                     200,
                                     2
                             ),
-                            2f),
+                            1f),
 
                             new Pair<>(CustomEffect.createCustomEffect(
                                     MobEffects.CONFUSION,
                                     200,
-                                    2
+                                    1
                             ),
-                                    2f))
+                                    1f),
+                            new Pair<>(
+                                    CustomEffect.createCustomEffect(
+                                    MobEffects.WEAKNESS,
+                                    200,
+                                    2),0.75f
+                                    )
+                            )
             );
 
 
