@@ -127,15 +127,18 @@ public class ModItems {
 
     public static final Item CAFFEINE_PILL_ITM =
             new PillItem(
+                    new Item.Properties().tab(ModCreativeModeTab.TUTORIAL_TAB),
                     CustomPillProperties.CAFFEINE_PILL_PROPERTIES,
                     1,
                     25
             );
     public static final Item PAINKILLER_PILL_ITM =
             new PillItem(
+                    new Item.Properties().tab(ModCreativeModeTab.TUTORIAL_TAB),
                     CustomPillProperties.PAINKILLER_PILL_PROPERTIES,
                     1,
                     25
+
             );
 
 

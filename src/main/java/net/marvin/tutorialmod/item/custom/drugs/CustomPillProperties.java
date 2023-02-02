@@ -13,24 +13,16 @@ import java.util.List;
 import java.util.function.Supplier;
 
 public class CustomPillProperties {
-    public static final Item.Properties CAFFEINE_PILL_PROPERTIES =
-            createPillProperties(
-                    ModCreativeModeTab.TUTORIAL_TAB,
-                    1,
-                    1,
+    public static final List<Pair<Supplier<MobEffectInstance>, Float>> CAFFEINE_PILL_PROPERTIES =
                     List.of(
                             new Pair<>(CustomEffect.createCustomEffect(
                                     MobEffects.MOVEMENT_SPEED,
                                     200,
                                     4
                                     ),
-                        2f))
-            );
-    public static final Item.Properties PAINKILLER_PILL_PROPERTIES =
-            createPillProperties(
-                    ModCreativeModeTab.TUTORIAL_TAB,
-                    1,
-                    1,
+                        2f)
+                    );
+    public static final List<Pair<Supplier<MobEffectInstance>, Float>> PAINKILLER_PILL_PROPERTIES =
                     List.of(
                             new Pair<>(CustomEffect.createCustomEffect(
                                     MobEffects.DAMAGE_RESISTANCE,
@@ -51,30 +43,5 @@ public class CustomPillProperties {
                                     200,
                                     2),0.75f
                                     )
-                            )
-            );
-
-
-
-
-
-
-
-
-
-    public static Item.Properties createPillProperties(CreativeModeTab modTab, int nutrition, int saturation, List<Pair<Supplier<MobEffectInstance>,Float>> effectList){
-        return new Item.Properties()
-                .tab(modTab)
-                .food(createPillFoodProperties(nutrition,saturation,effectList));
-    }
-    private static FoodProperties createPillFoodProperties(int nutrition, int saturationMod, List<Pair<Supplier<MobEffectInstance>,Float>> effects){
-        FoodProperties.Builder propertiesBuilder = new FoodProperties.Builder()
-                .nutrition(nutrition)
-                .saturationMod(saturationMod)
-                .alwaysEat();
-        effects.forEach(effect -> propertiesBuilder.effect(effect.getA(), effect.getB()));
-        return propertiesBuilder.build();
-
-
-    }
+                            );
 }
