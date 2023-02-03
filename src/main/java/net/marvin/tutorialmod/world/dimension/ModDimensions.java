@@ -7,7 +7,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.dimension.DimensionType;
 
-import java.awt.*;
 
 public class ModDimensions {
     public static final ResourceKey<Level> OVERDOSE_DIM_KEY =
