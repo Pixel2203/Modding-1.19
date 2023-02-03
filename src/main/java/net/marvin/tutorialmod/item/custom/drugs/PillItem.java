@@ -83,25 +83,16 @@ public class PillItem extends Item {
     }
     private void consumeItem(Player player, InteractionHand interactionHand){
         ItemStack pills = player.getItemInHand(interactionHand);
-
-        for(Pair<Supplier<MobEffectInstance>,Float> pair : this.EFFECT_LIST){
-            float probability = pair.getB();
-            if(probability >= 1){
-                player.addEffect(pair.getA().get());
-            }else if(probability > 0){
-                Random random = new Random();
-                float success = random.nextFloat(0,1);
-                if(success > 1-probability){
-                    player.addEffect(pair.getA().get());
-                }
-            }
-        }
-        player.playSound(SoundEvents.GENERIC_EAT);
-
-
-
         pills.shrink(1);
         player.setItemInHand(interactionHand,pills);
+        player.playSound(SoundEvents.GENERIC_EAT);
+        this.EFFECT_LIST.stream()
+                        .filter(pair -> pair.getB() >= 1 || new Random().nextFloat(0,1) > (1-pair.getB()))
+                        .map(Pair::getA)
+                        .map(Supplier::get)
+                        .forEach(player::addEffect);
+
+
 
 
     }

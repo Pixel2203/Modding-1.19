@@ -1,6 +1,6 @@
 package net.marvin.tutorialmod.item;
 
-import net.marvin.tutorialmod.item.custom.drugs.CustomPillProperties;
+import net.marvin.tutorialmod.properties.CustomPillProperties;
 import net.marvin.tutorialmod.item.custom.drugs.PillItem;
 import net.marvin.tutorialmod.block.BlockRegistry;
 import net.marvin.tutorialmod.item.custom.EightBallItem;

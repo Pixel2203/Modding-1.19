@@ -1,9 +1,10 @@
-package net.marvin.tutorialmod.item.custom.drugs;
+package net.marvin.tutorialmod.properties;
 
 import API.CustomEffect;
 import net.marvin.tutorialmod.item.ModCreativeModeTab;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
@@ -24,24 +25,32 @@ public class CustomPillProperties {
                     );
     public static final List<Pair<Supplier<MobEffectInstance>, Float>> PAINKILLER_PILL_PROPERTIES =
                     List.of(
-                            new Pair<>(CustomEffect.createCustomEffect(
+                            createPillEffect(CustomEffect.createCustomEffect(
                                     MobEffects.DAMAGE_RESISTANCE,
                                     200,
-                                    2
-                            ),
-                            1f),
+                                    2),
+                                    1f
+                                            ),
 
-                            new Pair<>(CustomEffect.createCustomEffect(
+                            createPillEffect(CustomEffect.createCustomEffect(
                                     MobEffects.CONFUSION,
                                     200,
-                                    1
-                            ),
-                                    1f),
-                            new Pair<>(
+                                    2),
+                                    1f
+                                            ),
+                            createPillEffect(
                                     CustomEffect.createCustomEffect(
                                     MobEffects.WEAKNESS,
                                     200,
-                                    2),0.75f
-                                    )
+                                    2),
+                                    0.75f
+                                            )
                             );
+
+    private static Pair<Supplier<MobEffectInstance>,Float> createPillEffect(Supplier<MobEffectInstance> supplier,float probability){
+        return new Pair<>(
+                supplier,
+                probability
+        );
+    }
 }
