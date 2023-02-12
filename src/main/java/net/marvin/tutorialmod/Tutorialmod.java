@@ -2,12 +2,12 @@ package net.marvin.tutorialmod;
 
 import com.mojang.logging.LogUtils;
 import net.marvin.tutorialmod.block.BlockRegistry;
-import net.marvin.tutorialmod.block.ModBlocks;
+import net.marvin.tutorialmod.block.entity.ModBlockEntities;
 import net.marvin.tutorialmod.item.ItemRegistry;
 import net.marvin.tutorialmod.painting.PaintingsRegistry;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.ItemBlockRenderTypes;
-import net.minecraft.client.renderer.RenderType;
+import net.marvin.tutorialmod.screen.GemInfusingStationScreen;
+import net.marvin.tutorialmod.screen.ModMenuTypes;
+import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -35,8 +35,10 @@ public class Tutorialmod
         ItemRegistry.register(modEventBus); // Adds Items
         BlockRegistry.register(modEventBus); // Adds Blocks
         ConfigFreatureInit.CONFIGURED_FEATURES.register(modEventBus); // Ore Generation
-        PlacedFeatureInit.PLACED_FEATURES.register(modEventBus);
-        PaintingsRegistry.register(modEventBus);
+        PlacedFeatureInit.PLACED_FEATURES.register(modEventBus); // Painting
+        PaintingsRegistry.register(modEventBus);  //Painting
+        ModBlockEntities.register(modEventBus);
+        ModMenuTypes.register(modEventBus);
         modEventBus.addListener(this::commonSetup);
 
 
@@ -62,6 +64,7 @@ public class Tutorialmod
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event)
         {
+            MenuScreens.register(ModMenuTypes.GEM_INFUSING_STATION_MENU.get(), GemInfusingStationScreen::new);
             //ItemBlockRenderTypes.setRenderLayer(ModBlocks.BLUEBERRY_CROP.get(), RenderType.cutout());
         }
     }
