@@ -4,6 +4,7 @@ import com.mojang.logging.LogUtils;
 import net.marvin.tutorialmod.block.BlockRegistry;
 import net.marvin.tutorialmod.block.entity.ModBlockEntities;
 import net.marvin.tutorialmod.item.ItemRegistry;
+import net.marvin.tutorialmod.networking.ModMessages;
 import net.marvin.tutorialmod.painting.PaintingsRegistry;
 import net.marvin.tutorialmod.screen.GemInfusingStationScreen;
 import net.marvin.tutorialmod.screen.ModMenuTypes;
@@ -52,6 +53,7 @@ public class Tutorialmod
         // Some common setup code
         LOGGER.info("HELLO FROM COMMON SETUP");
         LOGGER.info("DIRT BLOCK >> {}", ForgeRegistries.BLOCKS.getKey(Blocks.DIRT));
+        ModMessages.register();
     }
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call
