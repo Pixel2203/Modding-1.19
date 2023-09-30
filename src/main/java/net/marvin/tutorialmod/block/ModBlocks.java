@@ -1,6 +1,7 @@
 package net.marvin.tutorialmod.block;
 
 
+import net.marvin.tutorialmod.block.custom.GemInfusingStationBlock;
 import net.marvin.tutorialmod.block.custom.crops.BlueBerryCropBlock;
 import net.marvin.tutorialmod.block.custom.CustomSoilBlock;
 import net.marvin.tutorialmod.block.custom.CustomFarmlandBlock;
@@ -24,7 +25,7 @@ public class ModBlocks {
 
     // Custom
     public static final Block FISHHOOK_BLK =
-            new Block(BlockBehaviour.Properties.of(Material.STONE).strength(6f));
+            new Block(BlockBehaviour.Properties.of(Material.STONE).strength(6f).noOcclusion());
     public static final CropBlock BLUEBERRY_CROP_BLK =
             new BlueBerryCropBlock(BlockBehaviour.Properties.copy(Blocks.WHEAT));
 
@@ -46,6 +47,11 @@ public class ModBlocks {
                     .randomTicks()
                     .instabreak()
                     .sound(SoundType.GRASS));
+    public static final Block GEM_INFUSING_STATION_BLOCK =
+            new GemInfusingStationBlock(BlockBehaviour.Properties.of(Material.STONE)
+                    .strength(6f)
+                    .requiresCorrectToolForDrops()
+                    .noOcclusion());
 
 
 

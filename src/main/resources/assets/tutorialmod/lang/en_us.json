@@ -18,6 +18,8 @@
   "item.tutorialmod.fertilizer": "Fertilizer",
   "item.tutorialmod.raspberry": "Raspberry",
   "item.tutorialmod.raspberry_bush": "Raspberry Bush",
+  "item.tutorialmod.painkiller_pill": "Painkillers",
+  "item.tutorialmod.caffeine_pill": "Caffeine Pill",
 
   "block.tutorialmod.zircon_block": "Block of Zircon",
   "block.tutorialmod.zircon_ore" : "Zircon Ore",
@@ -27,6 +29,6 @@
   "block.tutorialmod.custom_farmland": "Custom Farmland Block",
   "block.tutorialmod.raspberry_bush": "Raspberry Crop",
   "block.tutorialmod.raspberry_bush_grown": "Raspberry Crop Grown",
-
+  "block.tutorialmod.gem_infusing_station": "Gem Infusing Station",
   "itemGroup.tutorialtab": "TutorialTab"
 }

@@ -1,21 +1,31 @@
 package net.marvin.tutorialmod.item.custom.drugs;
 
+import net.marvin.tutorialmod.capabilities.DrugUsage;
 import net.marvin.tutorialmod.capabilities.DrugUsageProvider;
+import net.marvin.tutorialmod.networking.ModMessages;
+import net.marvin.tutorialmod.networking.packet.ConsumeDrugC2SPacket;
+import net.marvin.tutorialmod.networking.packet.ExampleC2SPacket;
+import net.marvin.tutorialmod.world.dimension.ModDimensions;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.common.util.ITeleporter;
 import oshi.util.tuples.Pair;
 
 import java.util.List;
 import java.util.Random;
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 public class PillItem extends Item {
@@ -72,14 +82,37 @@ public class PillItem extends Item {
             player.getCooldowns().addCooldown(player.getItemInHand(interactionHand).getItem(), USE_COOLDOWN);
             increaseDrugLevel(player);
             consumeItem(player,interactionHand);
+            ModMessages.sendToServer(new ConsumeDrugC2SPacket()); // Synchronisierung des Drug Level über Server
         }
         return super.use(level, player, interactionHand);
     }
-    private void increaseDrugLevel(Player player){
+    public void increaseDrugLevel(Player player){
         player.getCapability(DrugUsageProvider.DRUG_USAGE).ifPresent(usage -> {
             usage.addDrugLevel(this.DRUG_LEVEL);
             System.out.println("Neues Drug Level: " + usage.getDrugLevel());
+            if(usage.getDrugLevel() > DrugUsage.maxDrugLevel){
+                sendToOverdoseDimension(player,player.getLevel());
+            }
         });
+
+    }
+    private void sendToOverdoseDimension(Player player, Level level){
+        if(player.getLevel().dimensionTypeId() != ModDimensions.OVERDOSE_DIM_TYPE){
+            MinecraftServer minecraftServer = level.getServer();
+            ServerLevel destinationWorld = minecraftServer.getLevel(ModDimensions.OVERDOSE_DIM_KEY);
+            if(destinationWorld != null){
+                System.out.println("Willkommen in der DrugDimension");
+                player.changeDimension(destinationWorld, new ITeleporter() {
+                    @Override
+                    public Entity placeEntity(Entity entity, ServerLevel currentWorld, ServerLevel destWorld, float yaw, Function<Boolean, Entity> repositionEntity) {
+                        return repositionEntity.apply(false);
+                    }
+                });
+            }
+
+        }else{
+            System.out.println("Bereits in der DrugDimension");
+        }
     }
     private void consumeItem(Player player, InteractionHand interactionHand){
         ItemStack pills = player.getItemInHand(interactionHand);

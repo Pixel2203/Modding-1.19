@@ -9,7 +9,6 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 
-import net.minecraft.world.level.block.FarmBlock;
 import net.minecraftforge.eventbus.api.IEventBus;
 
 import net.minecraftforge.registries.DeferredRegister;
@@ -54,6 +53,10 @@ public class BlockRegistry {
     public static final RegistryObject<Block> RASPBERRY_BUSH =
             BLOCKS.register("raspberry_bush",
                     () -> ModBlocks.RASPBERRY_BUSH_BLK);
+    public static final RegistryObject<Block> GEM_INFUSING_STATION =
+            registerBlock("gem_infusing_station",
+                    () -> ModBlocks.GEM_INFUSING_STATION_BLOCK,
+                    ModCreativeModeTab.TUTORIAL_TAB);
 
 
 
