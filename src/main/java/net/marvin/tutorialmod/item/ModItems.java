@@ -10,6 +10,7 @@ import net.marvin.tutorialmod.materials.ModMaterials;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
+import net.minecraftforge.fml.common.Mod;
 
 public class ModItems {
 
@@ -138,6 +139,15 @@ public class ModItems {
                     CustomPillProperties.PAINKILLER_PILL_PROPERTIES,
                     1,
                     25
+
+            );
+    public static final Item MORPHINE_SYRINGE_ITM =
+            new PillItem(
+                    new Item.Properties().tab(ModCreativeModeTab.TUTORIAL_TAB),
+                    CustomPillProperties.MORPHINE_SYRINGE_PROPERTIES,
+                    1,
+                    250,
+                    5
 
             );
 
