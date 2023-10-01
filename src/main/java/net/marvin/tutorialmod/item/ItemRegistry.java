@@ -69,6 +69,8 @@ public class ItemRegistry {
     public static final RegistryObject<Item> PAINKILLER_PILL =
             ITEMS.register("painkiller_pill", () -> ModItems.PAINKILLER_PILL_ITM);
 
+    public static final RegistryObject<Item> MORPHINE_SYRINGE =
+            ITEMS.register("morphine_syringe", () -> ModItems.MORPHINE_SYRINGE_ITM);
     public static void register(IEventBus eventBus){
         ITEMS.register(eventBus);
     }

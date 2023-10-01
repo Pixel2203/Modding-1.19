@@ -46,6 +46,25 @@ public class CustomPillProperties {
                                     0.75f
                                             )
                             );
+    public static final List<Pair<Supplier<MobEffectInstance>, Float>> MORPHINE_SYRINGE_PROPERTIES =
+            List.of(
+                    new Pair<>(CustomEffect.createCustomEffect(
+                            MobEffects.ABSORPTION,
+                            2000,
+                            7
+                    ),
+                            2f),
+                    new Pair<>(CustomEffect.createCustomEffect(
+                            MobEffects.CONFUSION,
+                            2000,
+                            7
+                    ),2f),
+                    new Pair<>(CustomEffect.createCustomEffect(
+                            MobEffects.BLINDNESS,
+                            200,
+                            2
+                    ),2f)
+            );
 
     private static Pair<Supplier<MobEffectInstance>,Float> createPillEffect(Supplier<MobEffectInstance> supplier,float probability){
         return new Pair<>(
