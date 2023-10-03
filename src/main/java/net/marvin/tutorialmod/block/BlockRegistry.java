@@ -55,8 +55,13 @@ public class BlockRegistry {
                     () -> ModBlocks.RASPBERRY_BUSH_BLK);
     public static final RegistryObject<Block> GEM_INFUSING_STATION =
             registerBlock("gem_infusing_station",
-                    () -> ModBlocks.GEM_INFUSING_STATION_BLOCK,
+                    () -> ModBlocks.GEM_INFUSING_STATION_BLK,
                     ModCreativeModeTab.TUTORIAL_TAB);
+    public static final RegistryObject<Block> CUSTOM_CAULDRON =
+            registerBlock("custom_cauldron",
+                    () -> ModBlocks.CUSTOM_CAULDRON_BLK,
+                    ModCreativeModeTab.TUTORIAL_TAB);
+
 
 
 

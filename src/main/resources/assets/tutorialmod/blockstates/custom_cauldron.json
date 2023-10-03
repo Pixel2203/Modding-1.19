@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "waterlevel=0": {
+      "model": "tutorialmod:block/custom_cauldron"
+    },
+    "waterlevel=1": {
+      "model": "tutorialmod:block/zircon_ore"
+    },
+    "waterlevel=2": {
+      "model": "tutorialmod:block/zircon_block"
+    },
+    "waterlevel=3": {
+      "model": "tutorialmod:block/custom_soil"
+    }
+  }
+}

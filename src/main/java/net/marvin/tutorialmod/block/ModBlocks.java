@@ -1,6 +1,7 @@
 package net.marvin.tutorialmod.block;
 
 
+import net.marvin.tutorialmod.block.custom.CustomCauldronBlock;
 import net.marvin.tutorialmod.block.custom.GemInfusingStationBlock;
 import net.marvin.tutorialmod.block.custom.crops.BlueBerryCropBlock;
 import net.marvin.tutorialmod.block.custom.CustomSoilBlock;
@@ -47,11 +48,13 @@ public class ModBlocks {
                     .randomTicks()
                     .instabreak()
                     .sound(SoundType.GRASS));
-    public static final Block GEM_INFUSING_STATION_BLOCK =
+    public static final Block GEM_INFUSING_STATION_BLK =
             new GemInfusingStationBlock(BlockBehaviour.Properties.of(Material.STONE)
                     .strength(6f)
                     .requiresCorrectToolForDrops()
                     .noOcclusion());
+    public static final CauldronBlock CUSTOM_CAULDRON_BLK =
+            new CustomCauldronBlock(BlockBehaviour.Properties.copy(Blocks.CAULDRON));
 
 
 

@@ -1,5 +1,6 @@
 package net.marvin.tutorialmod.item;
 
+import net.marvin.tutorialmod.item.custom.MagicPaste;
 import net.marvin.tutorialmod.properties.CustomPillProperties;
 import net.marvin.tutorialmod.item.custom.drugs.PillItem;
 import net.marvin.tutorialmod.block.BlockRegistry;
@@ -149,6 +150,10 @@ public class ModItems {
                     250,
                     5
 
+            );
+    public static final Item MAGIC_PASTE_ITM =
+            new MagicPaste(
+                    new Item.Properties().tab(ModCreativeModeTab.TUTORIAL_TAB)
             );
 
 
